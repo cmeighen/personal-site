@@ -1,2 +1,1 @@
-Template Author: KeenThemes
-
+This uses the [Aircv template by KeenThemes](http://keenthemes.com/free-bootstrap-templates/aircv-responsive-professional-cv-template/). 
