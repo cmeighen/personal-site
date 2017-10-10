@@ -28,62 +28,62 @@ function errorLog(error) {
 
 // Sass - Compile Sass files into CSS
 gulp.task('sass', function () {
-	gulp.src('../HTML/sass/**/*.scss')
-		.pipe(changed('../HTML/css/'))
+	gulp.src('../docs/sass/**/*.scss')
+		.pipe(changed('../docs/css/'))
 		.pipe(sass({ outputStyle: 'expanded' }))
 		.on('error', sass.logError)
-		.pipe(gulp.dest('../HTML/css/'));
+		.pipe(gulp.dest('../docs/css/'));
 });
 
 
 // Minify CSS
 gulp.task('minify-css', function() {
 	// Theme
-    gulp.src(['../HTML/css/layout.css', '!../HTML/css/layout.min.css'])
+    gulp.src(['../docs/css/layout.css', '!../docs/css/layout.min.css'])
         .pipe(cleanCSS({debug: true}, function(details) {
             console.log(details.name + ': ' + details.stats.originalSize);
             console.log(details.name + ': ' + details.stats.minifiedSize);
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('../HTML/css/'));
+        .pipe(gulp.dest('../docs/css/'));
 
     // RTL
-    gulp.src(['../HTML/css/layout-rtl.css', '!../HTML/css/layout-rtl.min.css'])
+    gulp.src(['../docs/css/layout-rtl.css', '!../docs/css/layout-rtl.min.css'])
         .pipe(cleanCSS({debug: true}, function(details) {
             console.log(details.name + ': ' + details.stats.originalSize);
             console.log(details.name + ': ' + details.stats.minifiedSize);
         }))
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('../HTML/css/'));
+        .pipe(gulp.dest('../docs/css/'));
 });
 
 
 // RTL CSS - Convert LTR CSS to RTL.
 gulp.task('rtlcss', function () {
-	gulp.src(['../HTML/css/layout.css', '!../HTML/css/layout.min.css', '!../HTML/css/layout-rtl.css', '!../HTML/css/layout-rtl.min.css'])
-	.pipe(changed('../HTML/css/'))
+	gulp.src(['../docs/css/layout.css', '!../docs/css/layout.min.css', '!../docs/css/layout-rtl.css', '!../docs/css/layout-rtl.min.css'])
+	.pipe(changed('../docs/css/'))
 		.pipe(rtlcss())
 		.pipe(rename({ suffix: '-rtl' }))
-		.pipe(gulp.dest('../HTML/css/'));
+		.pipe(gulp.dest('../docs/css/'));
 });
 
 
 // Minify JS - Minifies JS
 gulp.task('uglify', function (cb) {
   	pump([
-	        gulp.src(['../HTML/js/**/*.js', '!../HTML/js/**/*.min.js']),
+	        gulp.src(['../docs/js/**/*.js', '!../docs/js/**/*.min.js']),
 	        uglify(),
 			rename({ suffix: '.min' }),
-	        gulp.dest('../HTML/js/')
+	        gulp.dest('../docs/js/')
 		],
 		cb
 	);
 });
 
 
-// Htmlhint - Validate HTML
+// docshint - Validate docs
 gulp.task('htmlhint', function() {
-	gulp.src('../HTML/*.html')
+	gulp.src('../docs/*.html')
 		.pipe(htmlhint())
 		.pipe(htmlhint.reporter())
 	  	.pipe(htmlhint.failReporter({ suppress: true }))
@@ -99,9 +99,9 @@ gulp.task('default', ['sass', 'minify-css', 'rtlcss', 'uglify', 'htmlhint', 'wat
 
 // This handles watching and running tasks
 gulp.task('watch', function () {
-    gulp.watch('../HTML/sass/**/*.scss', ['sass']);
-    gulp.watch('../HTML/css/layout.css', ['minify-css']);
-    gulp.watch('../HTML/css/layout.css', ['rtlcss']);
-    gulp.watch('../HTML/js/**/*.js', ['uglify']);
-    gulp.watch('../HTML/*.html', ['htmlhint']);
+    gulp.watch('../docs/sass/**/*.scss', ['sass']);
+    gulp.watch('../docs/css/layout.css', ['minify-css']);
+    gulp.watch('../docs/css/layout.css', ['rtlcss']);
+    gulp.watch('../docs/js/**/*.js', ['uglify']);
+    gulp.watch('../docs/*.html', ['htmlhint']);
 });
