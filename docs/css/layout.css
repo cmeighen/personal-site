@@ -367,13 +367,6 @@ fieldset[disabled] .btn-theme {
   margin-bottom: 30px;
 }
 
-.service .service-icon-img {
-  display: block;
-  height: 30px;
-  color: #999caa;
-  margin-bottom: 30px;
-}
-
 .service:hover .service-element {
   opacity: 0;
   -webkit-transform: translate3d(0, -100%, 0);
@@ -1098,8 +1091,8 @@ fieldset[disabled] .btn-theme {
 }
 
 .content-lg {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 /*------------------------------------------------------------------
